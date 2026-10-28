@@ -1,0 +1,52 @@
+
+.studentcard {
+  width: 100%;
+  max-width: 350px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.studentcard img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.studentcard h1 {
+  color: #17365d;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.studentcard p {
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.studentcard strong {
+  color: #17365d;
+}
+
+.contact-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #2878b5;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.contact-button:hover {
+  background-color: #17365d;
+}
