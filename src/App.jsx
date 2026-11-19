@@ -4,6 +4,7 @@ import Header from "./assets/components/header.jsx";
 import Footer from "./assets/components/footer.jsx";
 import Navbar from "./assets/components/navbar.jsx";
 import StudentCard from "./assets/components/studentcard.jsx";
+import StudentForm from  "./assets/components/studentform.jsx";
 import tsts from "./assets/tsts.jpg";
 import { useState } from "react";
 
@@ -26,8 +27,8 @@ function App() {
       id: 2,
       prenom: "walaa",
       nom: "ben salem",
-      email: "walaabensalem11@gmail.com",
-      telephone: "20417019",
+      email: "walaabslm11@gmail.com",
+      telephone: "88888888",
       filiere: "genie logiciel et systemes d'information",
       groupe: "GLSI2A",
       annee: "2026-2027",
@@ -35,7 +36,11 @@ function App() {
       img: tsts,
     },
   ]);
-
+  const [recherche, setRecherche] = useState("");
+   const etudiantsFiltres = etudiants.filter(
+    (etudiant) =>
+      etudiant.filiere.toLowerCase().includes(recherche.toLowerCase())
+  );
   function ajouterEtudiant() {
     const nouvelEtudiant = {
       nom: "ben salem",
@@ -51,7 +56,29 @@ function App() {
 
     setEtudiants([...etudiants, nouvelEtudiant]);
   }
-
+  function SupprimerEtudiant(id){
+    setEtudiants(etudiants.filter((etudiant)=>
+      etudiant.id!==id))
+  }
+  function modifierEtudiant(id){
+    const nouveauPrenom=prompt("saisir le nouveau prenom:");
+    if(
+      nouveauPrenom !==null &&
+      nouveauPrenom.trim() !=="")
+      {
+      setEtudiants((anciensEtudiants)=>
+        anciensEtudiants.map(
+          (etudiant)=>
+            etudiant.id===id
+          ?{
+            ...etudiant,
+            prenom:nouveauPrenom.trim(),
+          }
+          :etudiant,
+        ),
+      );
+    }
+  };
   return (
     <>
       <header className="app-header">
@@ -59,6 +86,13 @@ function App() {
       </header>
 
       <Navbar />
+      <input
+        type="text"
+        placeholder="Rechercher par filière..."
+        value={recherche}
+        onChange={(e) => setRecherche(e.target.value)}
+      />
+      <StudentForm/>
 
       <div className="actions">
         <button onClick={ajouterEtudiant}>
@@ -69,7 +103,7 @@ function App() {
       <main className="container">
         {etudiants.map((student) => (
           <StudentCard
-            key={student.id}
+            id={student.id}
             prenom={student.prenom}
             nom={student.nom}
             email={student.email}
@@ -79,10 +113,11 @@ function App() {
             ville={student.ville}
             annee={student.annee}
             img={student.img}
+            onsupprime={SupprimerEtudiant}
+            onmodifier={modifierEtudiant}
           />
         ))}
       </main>
-
       <Footer />
     </>
   );
